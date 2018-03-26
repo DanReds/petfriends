@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-03-2018 a las 22:40:04
+-- Tiempo de generación: 26-03-2018 a las 23:11:34
 -- Versión del servidor: 10.1.30-MariaDB
--- Versión de PHP: 7.2.2
+-- Versión de PHP: 5.6.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,18 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `admins`
+-- Estructura de tabla para la tabla `balance`
 --
 
-CREATE TABLE `admins` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `balance` (
+  `idtx_bala` mediumint(9) NOT NULL,
+  `codi_ctas` varchar(6) NOT NULL,
+  `debi_bala` int(10) NOT NULL,
+  `cred_bala` int(10) NOT NULL,
+  `fctx_bala` date NOT NULL,
+  `fech_bala` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,10 +59,15 @@ CREATE TABLE `categorias` (
 INSERT INTO `categorias` (`iden_cate`, `nomb_cate`, `created_at`, `updated_at`) VALUES
 ('000001', 'Comida Perro', '2018-03-06 05:12:49', '2018-03-06 05:12:49'),
 ('02', 'Comida gatos', '2018-03-06 05:46:41', '2018-03-06 05:46:41'),
+('10', 'prueba3', '2018-03-17 22:25:11', '2018-03-17 22:25:11'),
+('11', 'prueba4', '2018-03-17 22:25:49', '2018-03-17 22:25:49'),
 ('3', 'Raton', '2018-03-06 07:47:50', '2018-03-06 07:47:50'),
 ('4', 'Serpiente', '2018-03-06 08:02:01', '2018-03-06 08:02:01'),
 ('5', 'Peces', '2018-03-06 07:48:47', '2018-03-06 07:48:47'),
-('7', 'Araña', '2018-03-06 08:15:15', '2018-03-06 08:15:15');
+('6', 'prueba', '2018-03-17 22:19:13', '2018-03-17 22:19:13'),
+('7', 'Araña', '2018-03-06 08:15:15', '2018-03-06 08:15:15'),
+('8', 'prueba1', '2018-03-17 22:19:55', '2018-03-17 22:19:55'),
+('9', 'prueba2', '2018-03-17 22:23:31', '2018-03-17 22:23:31');
 
 -- --------------------------------------------------------
 
@@ -110,7 +116,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`iden_clie`, `pnom_clie`, `snom_clie`, `pape_clie`, `sape_clie`, `emai_clie`, `dire_clie`, `created_at`, `updated_at`) VALUES
-('1030614149', 'Daniel', 'Camilo', 'Rojas', 'Arias', 'dan@mail.com', 'Cr 62 kr 20 27', '2018-03-06 09:46:15', '2018-03-06 09:46:15');
+('1030614149', 'Daniel', 'Camilo', 'Rojas', 'Arias', 'dan@mail.com', 'Cr 62 kr 20 27', '2018-03-06 09:46:15', '2018-03-06 09:46:15'),
+('1069767713', 'Angely', 'Natalia', 'Reyes', 'Roldan', 'angelynar960@gmail.com', 'Calle 21 # 2-32', '2018-03-15 02:20:10', '2018-03-15 02:20:10');
 
 -- --------------------------------------------------------
 
@@ -164,6 +171,7 @@ CREATE TABLE `factura` (
   `fech_fact` date NOT NULL,
   `iden_clie` varchar(10) NOT NULL,
   `codi_usua` varchar(8) NOT NULL,
+  `total_fact` int(7) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -172,31 +180,10 @@ CREATE TABLE `factura` (
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`iden_fact`, `fech_fact`, `iden_clie`, `codi_usua`, `updated_at`, `created_at`) VALUES
-('00001', '2018-03-16', '1030614149', '01', '2018-03-17 03:43:47', '2018-03-17 03:43:47'),
-('010', '2018-02-02', '1030614149', '03', '2018-03-18 01:38:09', '2018-03-18 01:38:09'),
-('099', '2018-03-03', '1030614149', '03', '2018-03-17 05:24:54', '2018-03-17 05:24:54');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2018_03_17_214740_create_admins_table', 1);
+INSERT INTO `factura` (`iden_fact`, `fech_fact`, `iden_clie`, `codi_usua`, `total_fact`, `updated_at`, `created_at`) VALUES
+('0001', '2018-03-17', '1069767713', '01', NULL, '2018-03-17 23:52:05', '2018-03-17 23:52:05'),
+('0002', '2018-03-18', '1030614149', '03', NULL, '2018-03-17 23:53:35', '2018-03-17 23:53:35'),
+('0003', '2018-03-17', '1069767713', '01', NULL, '2018-03-18 00:39:14', '2018-03-18 00:39:14');
 
 -- --------------------------------------------------------
 
@@ -222,18 +209,6 @@ INSERT INTO `natu_ctas` (`codi_natu`, `nomb_natu`, `updated_at`, `created_at`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `productos`
 --
 
@@ -250,6 +225,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`iden_prod`, `desc_prod`, `iden_cate`, `updated_at`, `created_at`) VALUES
+('000002', 'Catchow gatittos', '02', '2018-03-17 19:53:05', '2018-03-17 19:53:05'),
 ('123', 'Purina dog chow', '000001', '2018-03-06 11:23:06', '2018-03-06 11:23:06'),
 ('1234', 'Purina cat', '02', '2018-03-06 11:23:46', '2018-03-06 11:23:46'),
 ('12345', 'Semillas', '3', '2018-03-06 11:25:26', '2018-03-06 11:25:26');
@@ -291,6 +267,14 @@ CREATE TABLE `registrop` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `registrop`
+--
+
+INSERT INTO `registrop` (`iden_prod`, `iden_fact`, `fech_fact`, `cant_prod`, `pvun_prod`, `updated_at`, `created_at`) VALUES
+('000002', '0001', '2018-03-17', 3, 18000, '2018-03-18 00:37:03', '2018-03-18 00:37:03'),
+('1234', '0002', '2018-03-25', 5, 10000, '2018-03-25 21:52:46', '2018-03-25 21:52:46');
 
 -- --------------------------------------------------------
 
@@ -341,29 +325,13 @@ CREATE TABLE `tele_clie` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `users`
+-- Volcado de datos para la tabla `tele_clie`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Yuliana', 'yuliana@yuliana.com', '$2y$10$s5FzF8GTG5gy1002LnrghulVorlKvm.ljec0pjF5vBgnMZibbmWPO', 'xbxNxl4tIHjIXqCxgGSA4sMzrSC0pctOYabYnaxmabi74h9Zfo2Yea3XpAEs', '2018-03-18 03:56:22', '2018-03-18 03:56:22'),
-(2, 'Daniel', 'daniel@tontito.com', '$2y$10$imetyS1Ucs23/0gi8FKVwugegTdH31rk0lOMp9.71Kj6yCxCAp5yq', 'vUXDrzYWUsJTvMxMkFYH0YkB0ceE5iqak4jj98PvB2nKaT6K7xSyTnvMfmUn', '2018-03-18 03:58:13', '2018-03-18 03:58:13');
+INSERT INTO `tele_clie` (`iden_clie`, `tlef_clie`, `updated_at`, `created_at`) VALUES
+('1030614149', '3112375805', '2018-03-15 02:02:58', '2018-03-15 02:02:58'),
+('1069767713', '3202325733', '2018-03-15 02:21:39', '2018-03-15 02:21:39');
 
 -- --------------------------------------------------------
 
@@ -387,18 +355,20 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`codi_usua`, `nomb_usua`, `pass_usua`, `iden_rol`, `updated_at`, `created_at`) VALUES
 ('01', 'dcamilorojaas', 'dan12345', '1', '2018-03-13 23:04:52', '2018-03-13 23:04:52'),
 ('02', 'dfchacon', 'loquesea', '1', '2018-03-13 23:22:30', '2018-03-13 23:22:30'),
-('03', 'kygonzalez', '5675657', '1', '2018-03-13 22:58:55', '2018-03-13 22:58:55');
+('03', 'kygonzalez', '5675657', '1', '2018-03-13 22:58:55', '2018-03-13 22:58:55'),
+('4', 'anataliareyes', '12345', '1', '2018-03-15 01:34:45', '2018-03-15 01:34:45');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `admins`
+-- Indices de la tabla `balance`
 --
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admins_email_unique` (`email`);
+ALTER TABLE `balance`
+  ADD PRIMARY KEY (`idtx_bala`,`codi_ctas`),
+  ADD KEY `idtx_bala` (`idtx_bala`),
+  ADD KEY `FK_ctas_bala` (`codi_ctas`);
 
 --
 -- Indices de la tabla `categorias`
@@ -441,22 +411,10 @@ ALTER TABLE `factura`
   ADD KEY `FK_fact_usua` (`codi_usua`);
 
 --
--- Indices de la tabla `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `natu_ctas`
 --
 ALTER TABLE `natu_ctas`
   ADD PRIMARY KEY (`codi_natu`);
-
---
--- Indices de la tabla `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
 
 --
 -- Indices de la tabla `productos`
@@ -498,13 +456,6 @@ ALTER TABLE `tele_clie`
   ADD PRIMARY KEY (`iden_clie`,`tlef_clie`);
 
 --
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -516,26 +467,20 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `admins`
+-- AUTO_INCREMENT de la tabla `balance`
 --
-ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `balance`
+  MODIFY `idtx_bala` mediumint(9) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `balance`
+--
+ALTER TABLE `balance`
+  ADD CONSTRAINT `FK_ctas_bala` FOREIGN KEY (`codi_ctas`) REFERENCES `cuentas` (`codi_ctas`);
 
 --
 -- Filtros para la tabla `cuentas`

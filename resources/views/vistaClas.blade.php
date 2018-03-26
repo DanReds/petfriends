@@ -27,7 +27,7 @@
 		</tbody>
  	</table>
 
- 	<a href="/"><input type="button" value="Atrás"></a>
+ 	<a href="/crear_clas"><input type="button" value="Atrás"></a>
 
 </body>
 </html>

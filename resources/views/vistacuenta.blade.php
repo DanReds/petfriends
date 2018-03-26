@@ -4,6 +4,7 @@
 	<title>Vista de tabla</title>
 </head>
 <body>
+	<center>
 	<table>
 		<thead>
 			<tr>
@@ -18,12 +19,11 @@
 			@foreach ($cuenta as $cuentas)
 			<tr>
 
-				<th scope="row">{{$cuentas ->codi_ctas}}</th>
-				<td>{{$cuentas->nomb_ctas}}</td>
-				<td>{{$cuentas->codi_natu}}</td>
-				
-				<td>{{$cuentas->codi_clas}}</td>
-				<td>{{$cuentas->auxi_ctas}}</td>
+				<th scope="row">{{$cuentas ->codigo}}</th>
+				<td>{{$cuentas->nombre}}</td>
+				<td>{{$cuentas->nat}}</td>
+				<td>{{$cuentas->name}}</td>
+				<td>{{$cuentas->aux}}</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -32,6 +32,6 @@
 	<a href="/ingresoctas"><input type="button" value="Atrás"></a>
 	
 
-
+</center>
 </body>
 </html>

@@ -21,9 +21,10 @@
 	<br>
 	<br>
 	<button type="submit">agregar</button>
+	<a href="/verclas"><input type="button" value="ver"></a>
 	<br>
 	<br>
-
+	
 	<a href="/"><input type="button" value="volver a inicio"></a>
 
 
